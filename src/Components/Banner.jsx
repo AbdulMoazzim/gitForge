@@ -27,7 +27,7 @@ export default function Banner() {
   };
 
   return (
-    <div className="p-4 border rounded-md bg-white shadow">
+    <div className="p-4 border rounded-md bg-white shadow my-5">
       <h2 className="text-lg font-semibold mb-4">Banner Section</h2>
 
       {/* Image Upload */}

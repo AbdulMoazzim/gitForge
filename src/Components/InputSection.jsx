@@ -8,7 +8,7 @@ export default function InputSection() {
 
   return (
     <div className="p-6 w-full">
-      <div className="w-[90%] mx-auto border-1 border-black p-8 rounded-lg shadow h-[90%] overflow-y-auto">
+      <div className="w-full mx-auto border-1 border-black p-8 rounded-lg shadow h-[85vh] overflow-y-auto">
         {/* Instructions */}
         <div className="mb-6 p-4 bg-blue-100 border-l-4 border-blue-500 rounded-md">
           <h2 className="text-3xl font-semibold mb-2">How to Use</h2>

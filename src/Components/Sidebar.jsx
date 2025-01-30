@@ -6,6 +6,8 @@ import { data } from "../Context/dataProvider";
 import Introduction from "./Introduction";
 import Banner from "./Banner";
 import Contact from "./Contact";
+import CodingPlatform from "./CodingPlatform";
+import ToolsComponent from "./ToolsComponent";
 
 export const Sidebar = () => {
 
@@ -13,8 +15,8 @@ export const Sidebar = () => {
     { title: "Introduction", id: "introduction", data: {format: "paragraph", text: "", list: [], heading: "Hello There!"}, component: Introduction },
     { title: "Banner", id: "banner", component: Banner, data: {url: "", position: "full"}},
     { title: "Contact", id: "contact", data: {}, component: Contact },
-    { title: "Tools and Languages", id: "toolsAndLanguages" },
-    { title: "Coding Platforms Stats", id: "codingStats" }
+    { title: "Coding Platforms Stats", id: "codingStats", component: CodingPlatform, data: {github:{}, leetcode: {}, codeForces: {}} },
+    { title: "Tools and Languages", id: "toolsAndLanguages", component: ToolsComponent, data: {} },
   ];
 
   

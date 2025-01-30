@@ -62,7 +62,7 @@ export default function Introduction() {
   };
 
   return (
-    <div className="p-4 border rounded-md bg-white shadow">
+    <div className="p-4 border rounded-md bg-white shadow my-5">
       <h2 className="text-lg font-semibold mb-4">Introduction Section</h2>
 
       {/*Main Heading*/}
