@@ -38,7 +38,7 @@ export const Sidebar = () => {
 
   return (
     <>
-      <div className="border-r-2 border-gray-800 h-screen overflow-y-auto pb-[80px]">
+      <div className="lg:border-r-2 lg:border-b-0 border-gray-800 border-b-2 lg:h-screen overflow-y-auto lg:pb-[80px]">
         <div className="p-4">
           <h2 className="text-2xl font-bold mb-6">Your Sections</h2>
           <DragDropContext onDragEnd={handleDragEnd}>
@@ -116,7 +116,7 @@ export const Sidebar = () => {
 
         <div className="p-4">
           <h2 className="text-2xl font-bold mb-6">Custom Section</h2>
-          <div className="w-[90%]">
+          <div className="w-full flex justify-center">
             <button
               className="w-full py-2 bg-blue-600 text-white rounded-2xl"
               onClick={() => setIsModalOpen(true)}
@@ -131,7 +131,7 @@ export const Sidebar = () => {
       {isModalOpen &&
         createPortal(
           <div className="fixed inset-0 bg-[#00000050] flex justify-center items-center">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-2/5">
+            <div className="bg-white p-6 rounded-lg shadow-lg lg:w-2/5 w-4/5">
               <h2 className="text-xl font-bold mb-4">Custom Section</h2>
               <input
                 type="text"
@@ -160,7 +160,7 @@ export const Sidebar = () => {
                     setIsModalOpen(false);
                     setSections([
                       ...sections,
-                      { title: val, id: val.toLowerCase().replace(/\s/g, "") },
+                      { title: val, id: val.toLowerCase(), component: null, data: {} },
                     ]);}}
                 >
                   Add

@@ -41,7 +41,7 @@ export default function Banner() {
 
       {/* Display Options */}
       <label className="block mt-4 font-medium">Display Position:</label>
-      <div className="flex gap-4">
+      <div className="flex gap-4 flex-wrap">
         {["full", "left", "center", "right"].map((option) => (
           <label key={option} className="flex items-center cursor-pointer">
             <input

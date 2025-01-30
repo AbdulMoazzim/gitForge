@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { data } from "../Context/dataProvider";
 
 const availablePlatforms = {
@@ -21,8 +21,12 @@ export default function Contact() {
   const handleSelection = (platform) => {
     if (!selectedPlatforms.includes(platform)) {
       setSelectedPlatforms([...selectedPlatforms, platform]);
+    }else {
+      const upadtedPlatforms = selectedPlatforms.filter((plat)=>plat !== platform)
+      setSelectedPlatforms(upadtedPlatforms)
     }
   };
+  console.log(selectedPlatforms)
 
   // Handle input change and update sections in real time
   const handleUrlChange = (platform, url) => {

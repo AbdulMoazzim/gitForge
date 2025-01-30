@@ -79,7 +79,7 @@ export default function Introduction() {
 
       {/* Radio Box for Rendering Format */}
       <label className="block text-md font-medium mb-2">Render Introduction As:</label>
-      <div className="flex gap-4 mb-4">
+      <div className="flex gap-4 mb-4 flex-wrap">
         <label className="flex items-center cursor-pointer">
           <input
             type="radio"

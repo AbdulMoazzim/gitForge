@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <div className='overflow-hidden h-screen'>
+      <div>
         <Header />  
         <Outlet />
       </div>

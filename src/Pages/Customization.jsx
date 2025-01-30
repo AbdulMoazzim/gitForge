@@ -5,12 +5,12 @@ import MarkdownPreview from "../Components/MarkdownPreview";
 
 const PageWithSidebar = () => {
   return (
-    <div className="flex">
-      <div className="w-[15%]">
+    <div className="overflow-y-scroll lg:overflow-y-hidden flex flex-col lg:flex-row">
+      <div className="lg:w-[15%] w-full">
         {/* Sidebar */}
         <Sidebar />
       </div>
-      <div className="w-[85%] flex">
+      <div className="lg:w-[85%] flex w-full flex-col lg:flex-row">
         {/* Main Content */}
         <InputSection />
         <MarkdownPreview />

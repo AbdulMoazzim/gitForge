@@ -7,8 +7,8 @@ export default function InputSection() {
 
 
   return (
-    <div className="p-6 w-full">
-      <div className="w-full mx-auto border-1 border-black p-8 rounded-lg shadow h-[85vh] overflow-y-auto">
+    <div className="p-6 w-full lg:w-3/5">
+      <div className="mx-auto border-1 border-black p-8 rounded-lg shadow lg:h-[85vh] lg:overflow-y-auto">
         {/* Instructions */}
         <div className="mb-6 p-4 bg-blue-100 border-l-4 border-blue-500 rounded-md">
           <h2 className="text-3xl font-semibold mb-2">How to Use</h2>
@@ -23,7 +23,7 @@ export default function InputSection() {
         {/* Introduction Inputs */}
         {sections.map((section) => {
           const SectionComponent = section.component;
-          return <SectionComponent key={section.id} />;
+          return SectionComponent ? <SectionComponent /> : (<p>Custom section added</p>);
         })}
 
       </div>
