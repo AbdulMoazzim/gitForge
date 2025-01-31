@@ -24,38 +24,34 @@ const CodingPlatformsComponent = () => {
             ...prev,
             [name]: value
         }));
-
+    
         const data = {};
-
+    
         if (name === "github" && value) {
             data.github = {
-                api: `https://api.github.com/users/${value}`,
                 streak: `https://github-readme-streak-stats.herokuapp.com/?user=${value}`,
-                mostUsedLang: `https://github-readme-stats.vercel.app/api/top-langs/?username=${value}`,
-                profileView: `https://github.com/${value}`
+                mostUsedLang: `https://github-readme-stats.vercel.app/api/top-langs/?username=${value}`
             };
         }
-
+    
         if (name === "codeforces" && value) {
             data.codeforces = {
-                api: `https://codeforces.com/api/user.info?handles=${value}`,
-                streak: `https://codeforces.com/profile/${value}`,
-                mostUsedLang: `https://codeforces.com/problemset?tags=${value}`,
-                profileView: `https://codeforces.com/profile/${value}`
+                api: `https://codeforces-readme-stats.vercel.app/api/card?username=${value}`,
+                streak: `https://codeforces-readme-stats.vercel.app/api/badge?username=${value}`
             };
         }
-
+    
         if (name === "leetcode" && value) {
             data.leetcode = {
-                api: `https://leetcode.com/api/users/${value}`,
-                streak: `https://leetcode.com/streak/${value}`,
-                mostUsedLang: `https://leetcode.com/api/languages/${value}`,
-                profileView: `https://leetcode.com/${value}`
+                api: `https://leetcard.jacoblin.cool/${value}?theme=light&font=Encode%20Sans%20Semi%20Expanded&ext=heatmap`
             };
         }
-
-        setPlatformData((prev) => ({ ...prev, ...data }));
-        updatePlatformStats(data); // Ensure that updated data is passed
+    
+        setPlatformData((prev) => {
+            const updatedData = { ...prev, ...data };
+            updatePlatformStats(updatedData); // Ensure the latest state is passed
+            return updatedData;
+        });
     };
 
     const [platformData, setPlatformData] = useState({});

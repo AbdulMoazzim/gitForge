@@ -1,7 +1,7 @@
 import React from "react";
 import { Sidebar } from "../Components/Sidebar";
 import InputSection from "../Components/InputSection";
-import MarkdownPreview from "../Components/MarkdownPreview";
+import FullyFunctionalMD from "../Components/FullyFunctionalMD";
 
 const PageWithSidebar = () => {
   return (
@@ -13,7 +13,7 @@ const PageWithSidebar = () => {
       <div className="lg:w-[85%] flex w-full flex-col lg:flex-row">
         {/* Main Content */}
         <InputSection />
-        <MarkdownPreview />
+        <FullyFunctionalMD />
       </div>
     </div>
   );

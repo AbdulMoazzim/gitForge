@@ -19,14 +19,29 @@ export default function Contact() {
 
   // Handle selection of platforms
   const handleSelection = (platform) => {
+    let updatedPlatforms;
+    
     if (!selectedPlatforms.includes(platform)) {
-      setSelectedPlatforms([...selectedPlatforms, platform]);
-    }else {
-      const upadtedPlatforms = selectedPlatforms.filter((plat)=>plat !== platform)
-      setSelectedPlatforms(upadtedPlatforms)
+      updatedPlatforms = [...selectedPlatforms, platform];
+    } else {
+      updatedPlatforms = selectedPlatforms.filter((p) => p !== platform);
     }
+  
+    setSelectedPlatforms(updatedPlatforms);
+  
+    // Update sections to reflect the change
+    const contactData = updatedPlatforms.map((p) => ({
+      name: p,
+      url: urls[p] || "", // Preserve previously entered URLs
+      badge: availablePlatforms[p],
+    }));
+  
+    const updatedSections = sections.map((section) =>
+      section.id === "contact" ? { ...section, data: contactData } : section
+    );
+  
+    setSections(updatedSections);
   };
-  console.log(selectedPlatforms)
 
   // Handle input change and update sections in real time
   const handleUrlChange = (platform, url) => {

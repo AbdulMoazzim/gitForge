@@ -1,94 +1,97 @@
 import React, { useContext } from "react";
 import { data } from "../Context/dataProvider";
 
-// Function to generate Markdown from sections
-const generateMarkdown = (sections) => {
-  return sections
-    .map((section) => {
-      if (section.title === "Introduction") {
-        return `## ${section.data.heading}\n\n${section.data.text}`;
-      } else if (section.title === "Banner") {
-        return `![Banner Image](${section.data.url})`;
-      } else if (section.title === "Contact") {
-        return `### Contact Info\n\n${Object.entries(section.data)
-          .map(([key, value]) => `**${key}:** ${value}`)
-          .join("\n")}`;
-      } else if (section.title === "Coding Platforms Stats") {
-        return `### Coding Stats\n\nGithub: ${section.data.github?.username || "N/A"}`;
-      } else if (section.title === "Tools and Languages") {
-        return `### Tools & Languages\n\n${section.data.list?.join(", ") || "N/A"}`;
-      }
-      return `### ${section.title}\n\n(Custom Section)`;
-    })
-    .join("\n\n---\n\n");
-};
 
-// Function to download Markdown file
-const downloadMarkdown = (content) => {
-  const blob = new Blob([content], { type: "text/markdown" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "readme.md";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-};
-
-const MarkdownPreview = () => {
-  const [sections, setSections] = useContext(data)
-  const markdownContent = generateMarkdown(sections);
-
+const MarkdownPreview = ({sections}) => {
   return (
-    <div className="p-6 bg-gray-100 min-h-screen w-full lg:w-2/5">
-      {/* Buttons Section */}
-      <div className="mb-6 flex gap-4">
-        <button
-          onClick={() => downloadMarkdown(markdownContent)}
-          className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
-        >
-          Download MD
-        </button>
-        <button
-          onClick={() => alert(markdownContent)}
-          className="px-4 py-2 bg-gray-700 text-white font-semibold rounded-lg hover:bg-gray-800 transition duration-300"
-        >
-          Raw MD
-        </button>
-      </div>
-
-      {/* Preview Section */}
-      <div className="p-4 border border-gray-300 bg-white rounded-lg shadow-lg">
+      <div className="p-4 border border-gray-300 bg-white rounded-lg shadow-lg h-[80vh] overflow-y-scroll">
         {sections.length === 0 ? (
           <p className="text-gray-500">No sections added yet.</p>
         ) : (
-          sections.map((section) => (
-            <div key={section.id} className="mb-6">
-              <h2 className="text-xl font-bold">{section.title}</h2>
-
-              {/* Conditional Rendering */}
-              {section.id === "introduction" && <p>{section.data.text}</p>}
-              {section.id === "banner" && (
-                <img src={section.data.url} alt="Banner" className="w-full rounded-lg" />
-              )}
-              {section.id === "contact" &&
-                Object.entries(section.data).map(([key, value]) => (
-                  <p key={key}>
-                    <strong>{key}:</strong> {value}
-                  </p>
-                ))}
-              {section.id === "codingStats" && (
-                <p>GitHub: {section.data.github?.username || "N/A"}</p>
-              )}
-              {section.id === "toolsAndLanguages" && (
-                <p>Tools: {section.data.list?.join(", ") || "N/A"}</p>
-              )}
-            </div>
-          ))
+          sections.map((section) => {
+            if (section.id === "introduction") {
+              return (
+                <div
+                  key={section.id}
+                  className="my-6 p-4 border-b border-gray-300"
+                >
+                  <h2 className="text-3xl font-bold text-center mb-8">{section.data.heading}</h2>
+                  {section.data.format === "list" ? (
+                    <ul className="list-disc list-inside mt-2">
+                      {section.data.list.map((item) => (
+                        <li key={item.id} className="text-lg">{item.text}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-lg mt-2">{section.data.text}</p>
+                  )}
+                </div>
+              );
+            } else if (section.id === "banner") {
+              return (
+                <div key={section.id} className="my-6">
+                  <img
+                    src={section.data.url}
+                    alt="Banner"
+                    className=" h-auto rounded-lg shadow-md w-full"
+                  />
+                </div>
+              );
+            } else if (section.id === "contact") {
+              return (
+                <div key={section.id} className="my-6 p-4 border-b border-gray-300">
+                  <h3 className="text-2xl font-bold mb-4">Contact Info</h3>
+                  <div className="flex flex-wrap justify-center">
+                    {(section.data.length) > 0 ? (
+                      section.data.map((item, index) => (
+                        <a href={item.url} key={index} target="_blank" rel="noopener noreferrer">
+                          <img src={item.badge} alt={item.name} className="px-1" />
+                        </a>
+                      ))
+                        ) : (
+                          ""
+                        )}
+                  </div>
+                </div>
+              );
+            } else if (section.id === "codingStats") {
+              return (
+                <div key={section.id} className="my-6 p-4 border-b border-gray-300">
+                  <h3 className="text-2xl font-bold">Coding Platforms Stats</h3>
+                  <div className="flex flex-col items-center space-y-4 mt-4">
+                    {Object.entries(section.data).map((item) =>
+                      Object.values(item[1]).map((api, subIndex) => (
+                        <div key={subIndex}>
+                        <h2 className="text-3xl font-bold text-center my-4">{item[0].charAt(0).toUpperCase() + item[0].slice(1)}</h2>
+                        <img  
+                          src={api} 
+                          alt={item[0]} 
+                          className="rounded-lg shadow-lg"
+                        />
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+              );
+            } else if (section.id === "toolsAndLanguages") {
+              return (
+                <div key={section.id} className="my-6 p-4 border-b border-gray-300">
+                  <h3 className="text-2xl font-bold mb-4">Tools & Languages</h3>
+                  <div className="flex flex-wrap">
+                    {
+                      Object.entries(section.data).map((img)=>(<img src={img[1]} alt={img[0]} title={img[0]} key={img[0]} className="w-[60px] px-1"/>))
+                    }
+                  </div>
+                </div>
+              );
+            }
+            return null;
+          })
         )}
       </div>
-    </div>
   );
 };
+
 
 export default MarkdownPreview;

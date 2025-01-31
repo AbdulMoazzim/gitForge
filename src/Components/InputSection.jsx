@@ -23,7 +23,7 @@ export default function InputSection() {
         {/* Introduction Inputs */}
         {sections.map((section) => {
           const SectionComponent = section.component;
-          return SectionComponent ? <SectionComponent /> : (<p>Custom section added</p>);
+          return SectionComponent ? <SectionComponent key={section.id}/> : (<p>Custom section added</p>);
         })}
 
       </div>

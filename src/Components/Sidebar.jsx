@@ -13,8 +13,8 @@ export const Sidebar = () => {
 
   const BuiltInSections = [
     { title: "Introduction", id: "introduction", data: {format: "paragraph", text: "", list: [], heading: "Hello There!"}, component: Introduction },
-    { title: "Banner", id: "banner", component: Banner, data: {url: "", position: "full"}},
-    { title: "Contact", id: "contact", data: {}, component: Contact },
+    { title: "Banner", id: "banner", component: Banner, data: {url: ""}},
+    { title: "Contact", id: "contact", data: [], component: Contact },
     { title: "Coding Platforms Stats", id: "codingStats", component: CodingPlatform, data: {github:{}, leetcode: {}, codeForces: {}} },
     { title: "Tools and Languages", id: "toolsAndLanguages", component: ToolsComponent, data: {} },
   ];
