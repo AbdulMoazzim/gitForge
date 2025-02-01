@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Card from "../Components/Card";
 import SwiperComponent from "../Components/SwiperComponent";
+import empty from "../assets/empty.png"
+import full from "../assets/full.png"
 
 const HomePage = () => {
   return (
@@ -64,6 +66,25 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+
+
+      {/* Transformation Section */}
+      <div className="bg-gray-50 py-12 w-screen">
+  <div className="text-center">
+    <h2 className="text-3xl font-semibold mb-6">See the Transformation</h2>
+    <p className="text-lg text-gray-600 mb-6">
+      Watch how your GitHub profile transforms from a blank slate to a stunning, customized profile!
+    </p>
+    <div className="w-full flex justify-around items-center flex-col lg:flex-row">
+      {/* Empty Profile */}
+        <img src={empty} alt="Empty Profile" className="w-full lg:w-[40%] p-4"/>
+      {/* Full Profile */}
+        <img src={full} alt="Full Profile" className="w-full lg:w-[40%] p-4"/>
+    </div>
+  </div>
+</div>
+
+
 
       {/* Step-by-Step Guide Section */}
       <div className="bg-blue-50 py-12">

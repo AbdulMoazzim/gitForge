@@ -1,9 +1,10 @@
 import { createContext, useState } from "react"
+import { useLocalStorage } from "../Hooks/useLocalStorage";
 
 export const data = createContext();
 
 export function DataProvider({ children }) {
-  const [sections, setSections] = useState([]);
+  const [sections, setLocalStorage] = useLocalStorage();
   
-  return <data.Provider value={[sections, setSections]}>{children}</data.Provider>
+  return <data.Provider value={[sections, setLocalStorage]}>{children}</data.Provider>
 }

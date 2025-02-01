@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './Pages/Home.jsx'
 import CustomizationPage from './Pages/Customization.jsx'
 import { DataProvider } from './Context/dataProvider.jsx'
+import { ComponentProvider } from './Context/componentProvider.jsx'
 
 const router = createBrowserRouter([
   {
@@ -23,8 +24,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
     <DataProvider>
+      <ComponentProvider>
   <RouterProvider router={router}>
       <App />
     </RouterProvider>
+    </ComponentProvider>
     </DataProvider>
 )

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { data } from "../Context/dataProvider";
 
 const availablePlatforms = {
@@ -14,10 +14,19 @@ const availablePlatforms = {
 
 export default function Contact() {
   const [sections, setSections] = useContext(data);
-  const [selectedPlatforms, setSelectedPlatforms] = useState([]);
-  const [urls, setUrls] = useState({});
+  const [selectedPlatforms, setSelectedPlatforms] = useState(() => {
+    return JSON.parse(localStorage.getItem("selectedPlatforms")) || [];
+  });
 
-  // Handle selection of platforms
+  const [urls, setUrls] = useState(() => {
+    return JSON.parse(localStorage.getItem("urls")) || {};
+  });
+
+  useEffect(() => {
+    localStorage.setItem("selectedPlatforms", JSON.stringify(selectedPlatforms));
+    localStorage.setItem("urls", JSON.stringify(urls));
+  }, [selectedPlatforms, urls]);
+
   const handleSelection = (platform) => {
     let updatedPlatforms;
     
@@ -29,10 +38,9 @@ export default function Contact() {
   
     setSelectedPlatforms(updatedPlatforms);
   
-    // Update sections to reflect the change
     const contactData = updatedPlatforms.map((p) => ({
       name: p,
-      url: urls[p] || "", // Preserve previously entered URLs
+      url: urls[p] || "",
       badge: availablePlatforms[p],
     }));
   
@@ -43,12 +51,10 @@ export default function Contact() {
     setSections(updatedSections);
   };
 
-  // Handle input change and update sections in real time
   const handleUrlChange = (platform, url) => {
     const updatedUrls = { ...urls, [platform]: url };
     setUrls(updatedUrls);
     
-    // Update contact data in sections immediately
     const contactData = selectedPlatforms.map((p) => ({
       name: p,
       url: updatedUrls[p] || "",

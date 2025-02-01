@@ -3,20 +3,13 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { createPortal } from "react-dom";
 import { data } from "../Context/dataProvider";
-import Introduction from "./Introduction";
-import Banner from "./Banner";
-import Contact from "./Contact";
-import CodingPlatform from "./CodingPlatform";
-import ToolsComponent from "./ToolsComponent";
 
 export const Sidebar = () => {
-
   const BuiltInSections = [
-    { title: "Introduction", id: "introduction", data: {format: "paragraph", text: "", list: [], heading: "Hello There!"}, component: Introduction },
-    { title: "Banner", id: "banner", component: Banner, data: {url: ""}},
-    { title: "Contact", id: "contact", data: [], component: Contact },
-    { title: "Coding Platforms Stats", id: "codingStats", component: CodingPlatform, data: {github:{}, leetcode: {}, codeForces: {}} },
-    { title: "Tools and Languages", id: "toolsAndLanguages", component: ToolsComponent, data: {} },
+    { title: "Introduction", id: "introduction", data: {format: "paragraph", text: "", list: [], heading: "Hello There!"} },
+    { title: "Contact", id: "contact", data: [] },
+    { title: "Coding Platforms Stats", id: "codingStats", data: {github:{}, leetcode: {}, codeForces: {}} },
+    { title: "Tools and Languages", id: "toolsAndLanguages", data: {} },
   ];
 
   
@@ -65,7 +58,7 @@ export const Sidebar = () => {
                             href={`#${section.id}`}
                             className="text-lg hover:font-bold transition duration-300"
                           >
-                            {section.title}
+                            {section.title === "Custom Section" ? section.data.heading : section.title}
                           </a>
                           <button
                             className="text-red-500 cursor-pointer"
@@ -160,7 +153,7 @@ export const Sidebar = () => {
                     setIsModalOpen(false);
                     setSections([
                       ...sections,
-                      { title: val, id: val.toLowerCase(), component: null, data: {} },
+                      { title: "Custom Section", id: val.toLowerCase(), data: {format: "paragraph", text: "", list: [], heading: val} },
                     ]);}}
                 >
                   Add

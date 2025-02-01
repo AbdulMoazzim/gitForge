@@ -1,11 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { data } from "../Context/dataProvider";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 const ToolsComponent = () => {
   const [sections, setSections] = useContext(data);
   const [inputValue, setInputValue] = useState("");
-  const [tools, setTools] = useState({});
+  const [tools, setTools] = useState(() => {
+    // Retrieve tools from localStorage on initial render
+    return JSON.parse(localStorage.getItem("tools")) || {};
+  });
 
   // Function to add a new tool
   const handleAddTool = () => {
@@ -14,13 +17,12 @@ const ToolsComponent = () => {
     const toolKey = inputValue.toLowerCase();
     const toolIcon = `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${toolKey}/${toolKey}-original.svg`;
 
-    setTools((prevTools) => ({
-      ...prevTools,
-      [toolKey]: toolIcon,
-    }));
+    const updatedTools = { ...tools, [toolKey]: toolIcon };
 
+    setTools(updatedTools);
+    updateSections(updatedTools);
+    localStorage.setItem("tools", JSON.stringify(updatedTools)); // Save to localStorage
 
-    updateSections({ ...tools, [toolKey]: toolIcon });
     setInputValue(""); // Clear input after adding
   };
 
@@ -36,8 +38,10 @@ const ToolsComponent = () => {
   const handleRemoveTool = (toolKey) => {
     const updatedTools = { ...tools };
     delete updatedTools[toolKey];
+
     setTools(updatedTools);
     updateSections(updatedTools);
+    localStorage.setItem("tools", JSON.stringify(updatedTools)); // Save updated state to localStorage
   };
 
   return (
@@ -71,7 +75,7 @@ const ToolsComponent = () => {
               onClick={() => handleRemoveTool(key)}
               className="text-red-500 text-2xl mt-1"
             >
-             <RiDeleteBin6Line />
+              <RiDeleteBin6Line />
             </button>
           </div>
         ))}

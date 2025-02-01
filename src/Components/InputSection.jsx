@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { data } from "../Context/dataProvider";
+import { component } from "../Context/ComponentProvider";
+import CustomSection from "./CustomSection";
 
 export default function InputSection() {
 
-  const [sections] = useContext(data)
-
+  const [sections] = useContext(data);
+  const comp = useContext(component);
 
   return (
     <div className="p-6 w-full lg:w-3/5">
@@ -22,8 +24,11 @@ export default function InputSection() {
 
         {/* Introduction Inputs */}
         {sections.map((section) => {
-          const SectionComponent = section.component;
-          return SectionComponent ? <SectionComponent key={section.id}/> : (<p>Custom section added</p>);
+          const SectionComponent = comp[section.title];
+          if (SectionComponent === CustomSection) {
+            return <SectionComponent key={section.id} uniqueId= {section.id}/>
+          }
+          return <SectionComponent key={section.id}/>;
         })}
 
       </div>
