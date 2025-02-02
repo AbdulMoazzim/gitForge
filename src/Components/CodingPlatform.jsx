@@ -100,7 +100,7 @@ const CodingPlatformsComponent = () => {
             />
             <div className="py-2">
             <button
-                className="mt-2 px-3 mx-3 py-1 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition duration-300"
+                className="mt-2 px-3 mx-3 py-1 font-semibold rounded-lg text-red-500"
                 onClick={() => deleteApi(platform)}
               >
                 <RiDeleteBin6Line />

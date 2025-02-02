@@ -124,7 +124,7 @@ export default function Introduction() {
                 type="text"
                 value={item.text}
                 onChange={(e) => updateListItem(item.id, e.target.value)}
-                className="border border-gray-300 rounded-md p-2 flex-grow"
+                className="border border-gray-300 rounded-md p-2 w-[90%]"
                 placeholder="Enter a point..."
               />
               <button

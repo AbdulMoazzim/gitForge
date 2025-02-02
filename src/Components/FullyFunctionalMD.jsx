@@ -81,13 +81,13 @@ export default function FullyFunctionalHTML() {
     <div className="lg:w-2/5 w-full h-screen p-7">
       <div className="p-4 flex justify-around flex-wrap">
         <button
-          className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
+          className="px-4 py-2 m-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
           onClick={downloadHTML}
         >
           Download readme.md
         </button>
         <button
-          className="px-4 py-2 text-black font-semibold rounded-lg border-1 border-gray-400"
+          className="px-4 py-2 m-2 text-black font-semibold rounded-lg border-1 border-gray-400"
           onClick={() => setState(true)} 
         >
           Raw Data
