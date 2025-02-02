@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './Pages/Home.jsx'
 import CustomizationPage from './Pages/Customization.jsx'
 import { DataProvider } from './Context/dataProvider.jsx'
-import { ComponentProvider } from './Context/componentProvider.jsx'
+import { ComponentProvider } from './Context/ComponentProvider.jsx'
 
 const router = createBrowserRouter([
   {
